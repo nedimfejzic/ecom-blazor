@@ -1,5 +1,6 @@
 global using Blazor.Shared;
 global using Blazor.Server.Data;
+global using Blazor.Server.Services.ProductService;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,7 +18,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
+builder.Services.AddScoped<IProductService, ProductService>();
 
 var app = builder.Build();
 
