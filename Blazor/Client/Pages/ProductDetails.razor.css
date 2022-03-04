@@ -20,3 +20,8 @@
         height: auto;
     }
 }
+
+
+.original-price{
+    text-decoration: line-through;
+}
