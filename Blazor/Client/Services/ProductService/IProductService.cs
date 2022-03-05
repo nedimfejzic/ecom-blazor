@@ -9,5 +9,9 @@
         Task GetProducts(string ? categoryUrl=null);
         Task <ServiceResponse<Product>>GetProduct(int productId);
 
+        string Message { get; set; }
+        Task SearchProducts(string searchTerm);
+        Task <List<string>> GetSearchSuggestions(string searchTerm);
+
     }
 }
