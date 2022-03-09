@@ -10,7 +10,11 @@
         Task <ServiceResponse<Product>>GetProduct(int productId);
 
         string Message { get; set; }
-        Task SearchProducts(string searchTerm);
+        public int CurrentPage { get; set; }
+        public int PageCount { get; set; }
+        string LastSearchText { get; set; }
+
+        Task SearchProducts(string searchTerm, int page);
         Task <List<string>> GetSearchSuggestions(string searchTerm);
 
     }

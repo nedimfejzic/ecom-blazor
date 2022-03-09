@@ -1,35 +1,41 @@
 ﻿@page "/"
 @page "/{categoryUrl}"
-@page "/search/{searchTerm}"
+@page "/search/{searchTerm}/{page:int}"
 @inject IProductService _productService
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Nedo Blazor shop</PageTitle>
 
-<h1>Hello, world!</h1>
+@if (searchTerm == null && categoryUrl == null)
+{
+    <FeaturedProducts />
+}
 
-Welcome to your new app.
+else
+{
+    <ProductList />
+}
 
-<SurveyPrompt Title="How is Blazor working for you?" />
 
-
-<ProductList></ProductList>
-
-@code{
+@code {
     [Parameter]
     public string? categoryUrl { get; set; } = null;
 
     [Parameter]
     public string? searchTerm { get; set; } = null;
 
+    
+    [Parameter]
+    public int page{ get; set; } = 1;
+
     protected override async Task OnParametersSetAsync()
     {
-        if(searchTerm!=null)
+        if (searchTerm != null)
         {
-            await _productService.SearchProducts(searchTerm);
+            await _productService.SearchProducts(searchTerm, page);
         }
         else
         {
-        await _productService.GetProducts(categoryUrl);
+            await _productService.GetProducts(categoryUrl);
         }
     }
 }

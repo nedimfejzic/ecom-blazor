@@ -14,6 +14,10 @@ namespace Blazor.Client.Services.ProductService
         }
         public List<Product> products { get; set; } = new List<Product>();
         public string Message { get; set; }= "Loading products...";
+        public int CurrentPage { get; set; } = 1;
+        public int PageCount { get; set; } = 0;
+        public string LastSearchText { get; set; } = string.Empty;
+
         public async Task<ServiceResponse<Product>> GetProduct(int productId)
         {
             var result = await _http.GetFromJsonAsync<ServiceResponse<Product>>($"api/product/{productId}");
@@ -21,6 +25,10 @@ namespace Blazor.Client.Services.ProductService
         }
         public async Task GetProducts(string? categoryUrl = null)
         {
+
+            CurrentPage = 1;
+            PageCount = 0;
+
             var result = new ServiceResponse<List<Product>>();
 
             if (categoryUrl!=null)
@@ -39,15 +47,25 @@ namespace Blazor.Client.Services.ProductService
                 products = result.Data;
             }
 
+            if (products.Count == 0)
+            {
+                Message = "No products fouynd.";
+            }
+
             ProductsChanged.Invoke();
         }
 
-        public async Task SearchProducts(string searchTerm)
+        public async Task SearchProducts(string searchTerm, int page =1 )
         {
-            var result = await _http.GetFromJsonAsync<ServiceResponse<List<Product>>>($"api/product/search/{searchTerm}");
+            LastSearchText = searchTerm; 
+
+            var result = await _http.GetFromJsonAsync<ServiceResponse<ProductSearchResultDTO>>($"api/product/search/{searchTerm}/{page}");
             if (result != null && result.Data != null)
             {
-                products = result.Data;
+                products = result.Data.Products;
+                CurrentPage = result.Data.CurrentPage;
+                PageCount = result.Data.Pages;
+
             }
             if (products.Count == 0)
             {
@@ -64,5 +82,6 @@ namespace Blazor.Client.Services.ProductService
             return result.Data;
 
         }
+
     }
 }

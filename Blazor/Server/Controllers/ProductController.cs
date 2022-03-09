@@ -24,6 +24,14 @@ namespace Blazor.Server.Controllers
         }
 
 
+        [HttpGet("featured")]
+        public async Task<ActionResult<ServiceResponse<List<Product>>>> GetFeaturedProducts()
+        {
+            var result = await _productService.GetFeaturedProducts();
+            return Ok(result);
+        }
+
+
         [HttpGet]
         [Route("{productId}")]
         public async Task<ActionResult<ServiceResponse<Product>>> GetProductById(int productId)
@@ -40,10 +48,10 @@ namespace Blazor.Server.Controllers
             return Ok(result);
         }
 
-        [HttpGet("search/{searchTerm}")]
-        public async Task<ActionResult<ServiceResponse<List<Product>>>> SearchProducts(string searchTerm)
+        [HttpGet("search/{searchTerm}/{page}")]
+        public async Task<ActionResult<ServiceResponse<ProductSearchResultDTO>>> SearchProducts(string searchTerm,int page = 1)
         {
-            var result = await _productService.SearchProducts(searchTerm);
+            var result = await _productService.SearchProducts(searchTerm, page);
             return Ok(result);
         }
 
