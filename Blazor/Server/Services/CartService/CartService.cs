@@ -47,7 +47,8 @@ namespace Blazor.Server.Services.CartService
                     ImageUrl = product.ImageUrl,
                     Price = productVariant.Price,
                     ProductTypeId = productVariant.ProductTypeId,
-                    ProductType = productVariant.ProductType.Name
+                    ProductType = productVariant.ProductType.Name,
+                    Quantity = item.Quantity
                 };
 
                 result.Data.Add(cartProduct);

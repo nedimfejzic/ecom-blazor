@@ -2,9 +2,9 @@ global using Blazor.Shared;
 global using Blazor.Server.Data;
 global using Blazor.Server.Services.ProductService;
 global using Blazor.Server.Services.CategoryService;
-
+global using Blazor.Server.Services.CartService;
 using Microsoft.EntityFrameworkCore;
-using Blazor.Client.Services.CartService;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
