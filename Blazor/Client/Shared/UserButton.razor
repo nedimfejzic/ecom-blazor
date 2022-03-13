@@ -1,0 +1,33 @@
+﻿<div class="dropdown">
+    <buton  
+    @onclick="ToggleUserMenu"
+           
+          
+            class="btn btn-secondary dropdown-toggle user-button"
+    >
+        <i class="oi oi-person"></i>
+    </buton>
+    <div class="dropdown-menu dropdown-menu-right @UserMenuCssClass"  @onfocusout="HideUserMenu"  >
+        <a href="register" class="dropdown-item">Register</a>
+    </div>
+</div>
+
+@code {
+    private bool showUserMenu = false;
+
+    private string UserMenuCssClass => showUserMenu ? "show-menu" : "";
+
+    private void ToggleUserMenu()
+    {
+        showUserMenu = !showUserMenu;
+    }
+
+    private async Task HideUserMenu()
+    {
+        Console.WriteLine("got focus out hehe");
+        await Task.Delay(500);
+        showUserMenu = false;
+    }
+
+
+}

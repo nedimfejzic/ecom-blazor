@@ -1,0 +1,41 @@
+﻿@page "/register"
+
+<PageTitle>Registration page </PageTitle>
+
+
+<h3>Register</h3>
+
+<EditForm Model="user" OnValidSubmit="HandleRegistration">
+    <div class="mb-3">
+        <label for="email">Email</label>
+        <InputText id="email" @bind-Value="user.Email" class="form-control"></InputText>
+    </div>
+
+    <div class="mb-3">
+        <label for="password">Password</label>
+        <InputText id="password" @bind-Value="user.Password" class="form-control" type="password" ></InputText>
+
+    </div>
+
+    <div class="mb-3">
+        <label for="passwordConfirm">Password confirm</label>
+        <InputText id="passwordConfirm" @bind-Value="user.PasswordConfirm" class="form-control" type="password"></InputText>
+
+    </div>
+
+
+    <buton type="submit" class="btn btn-primary"> 
+        Register
+    </buton>
+
+
+</EditForm>
+
+
+@code {
+    UserRegister user = new UserRegister();
+    void HandleRegistration()
+    {
+        Console.WriteLine($"Register user with the email  {user.Email}");
+    }
+}
