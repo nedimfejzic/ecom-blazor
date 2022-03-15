@@ -7,17 +7,12 @@ using System.Threading.Tasks;
 
 namespace Blazor.Shared
 {
-    public class UserRegister
+    public class UserLoginDTO
     {
-        [Required, EmailAddress, StringLength(100, MinimumLength = 5)]
+        [Required, EmailAddress, StringLength(200, MinimumLength = 5)]
         public string Email { get; set; } = string.Empty;
 
         [Required, StringLength(100, MinimumLength = 5)]
         public string Password { get; set; } = string.Empty;
-
-        [Compare("Password", ErrorMessage ="Passwords do not match!")]
-        public string PasswordConfirm { get; set; } = string.Empty;
-
-
     }
 }

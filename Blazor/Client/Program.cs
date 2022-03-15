@@ -1,5 +1,7 @@
 global using Blazor.Shared;
+global using Microsoft.AspNetCore.Components.Authorization;
 using Blazor.Client;
+using Blazor.Client.Services.AuthService;
 using Blazor.Client.Services.CartService;
 using Blazor.Client.Services.CategoryService;
 using Blazor.Client.Services.ProductService;
@@ -15,7 +17,13 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+
 
 builder.Services.AddBlazoredLocalStorage();
+
+builder.Services.AddOptions();
+builder.Services.AddAuthorizationCore();
+builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
 
 await builder.Build().RunAsync();

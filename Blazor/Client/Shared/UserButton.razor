@@ -9,6 +9,7 @@
     </buton>
     <div class="dropdown-menu dropdown-menu-right @UserMenuCssClass"  @onfocusout="HideUserMenu"  >
         <a href="register" class="dropdown-item">Register</a>
+        <a href="login" class="dropdown-item">Login</a>
     </div>
 </div>
 
@@ -24,7 +25,6 @@
 
     private async Task HideUserMenu()
     {
-        Console.WriteLine("got focus out hehe");
         await Task.Delay(500);
         showUserMenu = false;
     }

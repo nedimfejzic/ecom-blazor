@@ -4,7 +4,7 @@ global using Blazor.Server.Services.ProductService;
 global using Blazor.Server.Services.CategoryService;
 global using Blazor.Server.Services.CartService;
 using Microsoft.EntityFrameworkCore;
-
+using Blazor.Server.Services.AuthService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +24,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 var app = builder.Build();
 
