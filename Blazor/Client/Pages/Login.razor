@@ -1,7 +1,9 @@
 ﻿@page "/login"
+@using Microsoft.AspNetCore.WebUtilities
 @inject IAuthService _authService
 @inject ILocalStorageService _localStorage
 @inject NavigationManager _navigationManager
+@inject AuthenticationStateProvider _authenticationStateProvider
 
 <PageTitle>Login page | nedo</PageTitle>
 
@@ -41,6 +43,17 @@
     private string errorMessage = string.Empty;
     private UserLoginDTO login = new UserLoginDTO();
 
+    private string returnUrl = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        var uri = _navigationManager.ToAbsoluteUri(_navigationManager.Uri);
+        if(QueryHelpers.ParseQuery(uri.Query).TryGetValue("returnUrl", out var url))
+        {
+            returnUrl = url;
+        };
+    }
+
     private async Task HandleLogin()
     {
         Console.WriteLine("login page handle fired");
@@ -51,7 +64,8 @@
             errorMessage = "";
 
             await _localStorage.SetItemAsync("authToken", result.Data);
-            _navigationManager.NavigateTo("");
+            await _authenticationStateProvider.GetAuthenticationStateAsync();
+            _navigationManager.NavigateTo(returnUrl);
         }
         else
         {
