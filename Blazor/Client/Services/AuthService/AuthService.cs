@@ -11,6 +11,12 @@ namespace Blazor.Client.Services.AuthService
             _httpClient  = httpClient; 
         }
 
+        public async Task<ServiceResponse<bool>> ChangePassword(UserChangePasswordDTO request)
+        {
+            var result = await _httpClient.PostAsJsonAsync("api/auth/change-password", request.Password);
+            return await result.Content.ReadFromJsonAsync<ServiceResponse<bool>>();
+        }
+
         public async Task<ServiceResponse<string>> Login(UserLoginDTO request)
         {
             var result = await _httpClient.PostAsJsonAsync("api/auth/login", request);

@@ -1,10 +1,47 @@
 ﻿@page "/profile"
+@attribute [Authorize]
+@inject IAuthService _authService
 
 <AuthorizeView>
 <h1>you are logged in with <i>@context.User.Identity.Name</i></h1>
 </AuthorizeView>
 
+<h5>Change password</h5>
+<EditForm Model="request" OnValidSubmit="ChangePassword">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+
+
+    <div class="mb-3">
+        <label for="password">Password</label>
+        <InputText id="password" @bind-Value="request.Password" class="form-control" type="password" ></InputText>
+        <ValidationMessage  For="@(()=> request.Password)"/>
+
+    </div>
+
+    <div class="mb-3">
+        <label for="passwordConfirm">Password confirm</label>
+        <InputText id="passwordConfirm" @bind-Value="request.PasswordConfirm" class="form-control" type="password"></InputText>
+        <ValidationMessage  For="@(()=> request.PasswordConfirm)"/>
+
+    </div>
+
+    <button type="submit" class="btn btn-primary"> 
+        Apply
+    </button>
+     
+
+
+</EditForm>
+    <div class="text-danger">@message</div>
+
 
 @code {
+    UserChangePasswordDTO request = new UserChangePasswordDTO();
+    string message = string.Empty;
 
+    private async Task ChangePassword()
+    {
+        var result = await _authService.ChangePassword(request);
+        message = result.Message;
+    }
 }
