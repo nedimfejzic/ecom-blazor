@@ -11,6 +11,9 @@ namespace Blazor.Server.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
+            modelBuilder.Entity<OrderItem>()
+              .HasKey(x => new { x.OrderId, x.ProductId, x.ProductTypeId });
+
             modelBuilder.Entity<ProductVariant>()
               .HasKey(x => new { x.ProductId, x.ProductTypeId });
 
@@ -274,5 +277,7 @@ namespace Blazor.Server.Data
         public DbSet<ProductVariant> ProductVariants { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<CartItem> CartItems{ get; set; }
+        public DbSet<Order> Orders{ get; set; }
+        public DbSet<OrderItem> OrderItems{ get; set; }
     }
 }

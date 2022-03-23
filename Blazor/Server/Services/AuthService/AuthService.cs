@@ -10,11 +10,13 @@ namespace Blazor.Server.Services.AuthService
     {
         private readonly DataContext _context;
         private readonly IConfiguration _configuration;
+        private readonly IHttpContextAccessor _httpContext;
 
-        public AuthService(DataContext dataContext, IConfiguration configuration)
+        public AuthService(DataContext dataContext, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             _context = dataContext;
             _configuration = configuration;
+            _httpContext = httpContextAccessor;
 
         }
 
@@ -128,6 +130,11 @@ namespace Blazor.Server.Services.AuthService
 
             return new ServiceResponse<bool> { Data = true, Message ="Password has been changed"};
 
+        }
+
+        public int GetUserId()
+        {
+           return int.Parse(_httpContext.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
         }
     }
 }
