@@ -1,6 +1,7 @@
 global using Blazor.Shared;
 global using Microsoft.AspNetCore.Components.Authorization;
 using Blazor.Client;
+using Blazor.Client.Services.AddressService;
 using Blazor.Client.Services.AuthService;
 using Blazor.Client.Services.CartService;
 using Blazor.Client.Services.CategoryService;
@@ -20,6 +21,7 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IAddressService, AddressService>();
 
 
 builder.Services.AddBlazoredLocalStorage();
