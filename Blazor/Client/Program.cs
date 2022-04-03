@@ -7,6 +7,7 @@ using Blazor.Client.Services.CartService;
 using Blazor.Client.Services.CategoryService;
 using Blazor.Client.Services.OrderService;
 using Blazor.Client.Services.ProductService;
+using Blazor.Client.Services.ProductTypeService;
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -22,6 +23,7 @@ builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IAddressService, AddressService>();
+builder.Services.AddScoped<IProductTypeService, ProductTypeService>();
 
 
 builder.Services.AddBlazoredLocalStorage();

@@ -5,6 +5,8 @@ global using Blazor.Server.Services.CategoryService;
 global using Blazor.Server.Services.CartService;
 global using Blazor.Server.Services.OrderService;
 global using Blazor.Server.Services.AddressService;
+global using Blazor.Server.Services.ProductTypeService;
+
 using Microsoft.EntityFrameworkCore;
 using Blazor.Server.Services.AuthService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -31,6 +33,7 @@ builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IAddressService, AddressService>();
+builder.Services.AddScoped<IProductTypeService, ProductTypeService>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(
                 option =>
                 {
